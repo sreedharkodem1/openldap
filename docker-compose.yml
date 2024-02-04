@@ -1,0 +1,32 @@
+version: '3'
+services:
+  openldap:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      LDAP_DOMAIN: "example.com"
+      LDAP_ADMIN_PASSWORD: "admin"
+    volumes:
+      - ldap_data:/etc/openldap/openldap-data
+      - ldap_config:/etc/ldap/slapd.d
+    networks:
+      - ldap_network
+    ports:
+      - 389:389
+      - 636:636
+  phpadmin:
+    image: osixia/phpldapadmin:0.9.0
+    ports:
+      - '9080:80'
+    environment:
+      - "PHPLDAPADMIN_LDAP_HOSTS=#PYTHON2BASH:[{'openldap-openldap-1': [{'server': [{'tls': False, 'port': 389}]},{'login': [{'bind_id': 'cn=admin,dc=accenture,dc=com'}]}]}]"
+      - PHPLDAPADMIN_HTTPS=False
+    networks:
+      - ldap_network
+networks:
+  ldap_network:
+
+volumes:
+  ldap_data:
+  ldap_config:

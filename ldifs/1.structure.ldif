@@ -1,0 +1,80 @@
+dn: dc=example,dc=com
+objectClass: top
+objectClass: dcObject
+objectClass: organization
+o: Example Organization
+dc: example
+
+dn: dc=ldap,dc=example,dc=com
+objectClass: top
+objectClass: dcObject
+objectclass: organization
+o: example LDAP
+dc: ldap
+description: Base DN for example LDAP
+
+
+# Other entries
+dn: ou=people,dc=ldap,dc=example,dc=com
+objectClass: organizationalUnit
+objectClass: top
+ou: people
+
+# Other entries
+dn: ou=service-users,dc=ldap,dc=example,dc=com
+objectClass: organizationalUnit
+objectClass: top
+ou: service-users
+
+dn: ou=groups,dc=ldap,dc=example,dc=com
+objectClass: organizationalUnit
+objectClass: top
+ou: groups
+
+dn: cn=gitlab,ou=service-users,dc=ldap,dc=example,dc=com
+objectClass: inetOrgPerson
+objectClass: organizationalPerson
+objectClass: person
+objectClass: top
+cn: gitlab
+displayName: gitlab
+givenName: gitlab
+mail: gitlab@ldap.example.com
+sn: gitlab
+uid: gitlab
+userPassword:: test
+
+dn: cn=jenkins,ou=service-users,dc=ldap,dc=example,dc=com
+objectClass: inetOrgPerson
+objectClass: organizationalPerson
+objectClass: person
+objectClass: top
+cn: jenkins
+displayName: jenkins
+givenName: jenkins
+mail: jenkins@ldap.example.com
+sn: jenkins
+uid: jenkins
+userPassword:: test
+
+dn: cn=nexus,ou=service-users,dc=ldap,dc=example,dc=com
+objectClass: inetOrgPerson
+objectClass: organizationalPerson
+objectClass: person
+objectClass: top
+cn: nexus
+displayName: nexus
+givenName: nexus
+mail: nexus@ldap.example.com
+sn: nexus
+uid: nexus
+userPassword:: test
+
+dn: cn=administrators,ou=groups,dc=ldap,dc=example,dc=com
+objectClass: groupOfUniqueNames
+objectClass: top
+cn: administrators
+uniqueMember: cn=jenkins,ou=service-users,dc=ldap,dc=example,dc=com
+uniqueMember: cn=gitlab,ou=service-users,dc=ldap,dc=example,dc=com
+uniqueMember: cn=nexus,ou=service-users,dc=ldap,dc=example,dc=com
+uniqueMember: cn=admin,dc=ldap,dc=example,dc=com
